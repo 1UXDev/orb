@@ -1,0 +1,43 @@
+.backgroundTeaser {
+  position: absolute;
+  width: 100%;
+  height: 50vh;
+  min-height: 250px;
+  z-index: -1;
+}
+.backgroundTeaser img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detailSectionHeading {
+  margin: 96px;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.detailSectionCustomization {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.workspace {
+  display: flex;
+  flex-direction: row;
+}
+.workspace * {
+  flex: 1;
+  padding: 6px;
+  overflow: hidden;
+}
+.workspace *.hidden {
+  display: none;
+}
+
+.contentCheckboxes {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  padding: 12px 0px;
+}

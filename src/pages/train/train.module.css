@@ -1,0 +1,87 @@
+.smallSection {
+  padding-top: 0px;
+}
+
+.smallSection * {
+  padding-top: 0%;
+}
+
+.backToSchool {
+  width: 92vw;
+  height: 60vh;
+  background-color: rgb(59, 108, 150);
+  display: block;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.backToSchool img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlayText {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  background: rgb(79, 0, 106);
+  background: linear-gradient(
+    90deg,
+    rgba(79, 0, 106, 0.5) 0%,
+    rgba(0, 117, 255, 0.2) 100%
+  );
+}
+
+.overlayText h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.overlayText p {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.overlayText ul li {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  color: rgb(250, 250, 250);
+}
+
+.overlayText button {
+  font-size: 0.8rem;
+  font-weight: 400;
+  max-width: 150px;
+  margin: 32px 0px;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  align-self: bottom;
+}
+
+.overlayText ul {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 24px;
+  align-self: flex-start;
+  margin: 24px 0px;
+}
+
+.overlayText ul li {
+  list-style-type: none;
+}

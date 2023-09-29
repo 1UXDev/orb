@@ -1,0 +1,28 @@
+.responsiveForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.questionnaireButtons {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.questionnaireButtons button {
+  font-size: 0.8rem;
+  font-weight: 400;
+  background-color: rgb(1, 65, 255);
+  border: 2px solid rgb(1, 65, 255);
+  color: white;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.questionnaireButtons button.ghostButton {
+  background-color: transparent;
+  color: rgb(1, 65, 255);
+  border: 2px solid rgb(1, 65, 255);
+}

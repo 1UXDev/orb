@@ -1,0 +1,52 @@
+.navbar,
+.navbarWrapper,
+.navbarWrapper ul,
+.usersArea {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 12px 36px;
+  backdrop-filter: blur(12px);
+  position: fixed;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.navbarWrapper ul {
+  justify-self: center;
+  list-style-type: none;
+  gap: 24px;
+  color: rgb(25, 25, 25);
+}
+
+.navbarWrapper ul li,
+.notifications,
+.user {
+  cursor: pointer;
+}
+.navbarWrapper ul li:hover {
+  text-decoration: underline;
+}
+.navbarWrapper ul li:active {
+  font-weight: 600;
+}
+
+.liActive {
+  color: black;
+  font-weight: 600;
+}
+
+.usersArea {
+  gap: 24px;
+}
