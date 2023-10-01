@@ -1,11 +1,14 @@
 import { useRouter } from "next/router";
 import { initialTasks } from "../../../../public/trainingDB";
+import { tableDB } from "../../../../public/tableDB";
 import { useState, useEffect } from "react";
 import styles from "./trainDetail.module.css";
 
 import Questionnaire from "@/components/Questionnaire/Questionnaire";
 import Gallery from "@/components/Gallery/Gallery";
 import StaticHTMLComponent from "@/components/DicomLocal/StaticComponent";
+import Datatable from "@/components/Datatable/Datatable";
+import DicomDataParser from "@/components/DicomLocal/DicomDataParser";
 
 export default function TrainDetailPage() {
   const router = useRouter();
@@ -26,13 +29,33 @@ export default function TrainDetailPage() {
   const [imageHidden, setImageHidden] = useState(true);
   const [questionnaireHidden, setQuestionnaireHidden] = useState(true);
 
+  const [selectedCase, setSelectedCase] = useState(null);
   return (
     <>
       <div className={`${styles.backgroundTeaser}`}>
         {task && <img src={task.image} alt={task.title} />}{" "}
       </div>
       <section className={`${styles.detailSectionHeading}`}>
-        {task ? <h1>{task.title}</h1> : <h1>Loading...</h1>}{" "}
+        {task ? <h1>{task.title}</h1> : <h1>Loading...</h1>}
+        <div className={`${styles.casesRow}`}>
+          {task &&
+            task.structure.map((caseItem, index) => (
+              <div
+                className={`${styles.casePill} ${
+                  selectedCase !== null
+                    ? selectedCase === caseItem
+                      ? styles.selected
+                      : ""
+                    : index === 0
+                    ? styles.selected
+                    : ""
+                }`}
+                onClick={() => setSelectedCase(caseItem)}
+              >
+                {caseItem.case}
+              </div>
+            ))}
+        </div>
       </section>
 
       <section className={`${styles.detailSectionCustomization}`}>
@@ -73,95 +96,7 @@ export default function TrainDetailPage() {
             }`}
           >
             <h3>Data</h3>
-            <table>
-              <tbody>
-                <tr>
-                  <td colSpan="2">
-                    <strong>Demographics</strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Patient Name</td>
-                  <td>John Doe</td>
-                </tr>
-                <tr>
-                  <td>Gender</td>
-                  <td>Male</td>
-                </tr>
-                <tr>
-                  <td>Date of Birth</td>
-                  <td>January 15, 1980</td>
-                </tr>
-                <tr>
-                  <td>Height</td>
-                  <td>180 cm (5'11")</td>
-                </tr>
-                <tr>
-                  <td>Weight</td>
-                  <td>75 kg (165 lbs)</td>
-                </tr>
-                <tr>
-                  <td>Blood Type</td>
-                  <td>O+</td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <strong>Cardiological Data</strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Blood Pressure</td>
-                  <td>
-                    Systolic: 120 mm Hg
-                    <br />
-                    Diastolic: 80 mm Hg
-                  </td>
-                </tr>
-                <tr>
-                  <td>Heart Rate</td>
-                  <td>72 bpm</td>
-                </tr>
-                <tr>
-                  <td>ECG (Electrocardiogram)</td>
-                  <td>
-                    Heart Rhythm: Normal Sinus Rhythm
-                    <br />
-                    PR Interval: 0.16 seconds
-                    <br />
-                    QRS Duration: 0.08 seconds
-                  </td>
-                </tr>
-                <tr>
-                  <td>Echocardiogram</td>
-                  <td>
-                    Ejection Fraction: 65%
-                    <br />
-                    Left Ventricular Mass: 150 g<br />
-                    Valvular Function: Normal
-                  </td>
-                </tr>
-                <tr>
-                  <td>Lipid Profile</td>
-                  <td>
-                    Total Cholesterol: 180 mg/dL
-                    <br />
-                    HDL Cholesterol: 50 mg/dL
-                    <br />
-                    LDL Cholesterol: 110 mg/dL
-                    <br />
-                    Triglycerides: 70 mg/dL
-                  </td>
-                </tr>
-                <tr>
-                  <td>Troponin Level</td>
-                  <td>0.05 ng/mL</td>
-                </tr>
-                <tr>
-                  <td>BNP (B-type Natriuretic Peptide)</td>
-                  <td>30 pg/mL</td>
-                </tr>
-              </tbody>
-            </table>
+            <Datatable tableContent={tableDB}></Datatable>
           </div>
           <div
             className={`${styles.detailSectionContentMiddle} ${
@@ -171,6 +106,7 @@ export default function TrainDetailPage() {
             <h3>Image</h3>
             {/* <Gallery></Gallery> */}
             <StaticHTMLComponent></StaticHTMLComponent>
+            {/* <DicomDataParser></DicomDataParser> */}
           </div>
           <div
             className={`${styles.detailSectionContentRight} ${

@@ -1,6 +1,6 @@
 import React from "react";
 
-const StaticHTMLComponent = () => {
+const StaticHTMLComponent = ({ test }) => {
   // Define your static HTML content as a string
   const staticHTML = `
     <script src="https://unpkg.com/cornerstone-core@2.3.0/dist/cornerstone.min.js"></script>
