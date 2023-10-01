@@ -5,6 +5,7 @@ import styles from "./trainDetail.module.css";
 
 import Questionnaire from "@/components/Questionnaire/Questionnaire";
 import Gallery from "@/components/Gallery/Gallery";
+import StaticHTMLComponent from "@/components/DicomLocal/StaticComponent";
 
 export default function TrainDetailPage() {
   const router = useRouter();
@@ -168,7 +169,8 @@ export default function TrainDetailPage() {
             }`}
           >
             <h3>Image</h3>
-            <Gallery></Gallery>
+            {/* <Gallery></Gallery> */}
+            <StaticHTMLComponent></StaticHTMLComponent>
           </div>
           <div
             className={`${styles.detailSectionContentRight} ${
