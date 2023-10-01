@@ -19,6 +19,8 @@
 .DS_Store
 *.pem
 *.env
+*.DCM
+*.zip
 
 # debug
 npm-debug.log*

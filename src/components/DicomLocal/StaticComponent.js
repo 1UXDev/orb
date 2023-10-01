@@ -9,10 +9,7 @@ const StaticHTMLComponent = () => {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 
     <div class="header">
-        <h1>MRI/CT scan viewer</h1>
-        <h2>Load ZIP with DICOM images</h3>
         <input type="file" id="zipFile" accept=".zip" onchange="loadZipFile()">zip</input>
-        <input type="file" id="dcmFile" accept=".dcm" onchange="loadDcmFile()">DCM</input>
     </div>
     <div id="seriesContainers"></div>
 
