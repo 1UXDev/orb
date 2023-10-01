@@ -1,14 +1,15 @@
 import { useRouter } from "next/router";
-import { initialTasks } from "../../../../public/trainingDB";
-import { tableDB } from "../../../../public/tableDB";
 import { useState, useEffect } from "react";
 import styles from "./trainDetail.module.css";
 
+// Mock DBs
+import { initialTasks } from "../../../../public/trainingDB";
+import { tableDB } from "../../../../public/tableDB";
+
+// Components
 import Questionnaire from "@/components/Questionnaire/Questionnaire";
-import Gallery from "@/components/Gallery/Gallery";
-import StaticHTMLComponent from "@/components/DicomLocal/StaticComponent";
+import CombinedComponent from "@/components/DicomLocal/StaticComponent";
 import Datatable from "@/components/Datatable/Datatable";
-import DicomDataParser from "@/components/DicomLocal/DicomDataParser";
 
 export default function TrainDetailPage() {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function TrainDetailPage() {
   const [questionnaireHidden, setQuestionnaireHidden] = useState(true);
 
   const [selectedCase, setSelectedCase] = useState(null);
+  const [selectedStudy, setSelectedStudy] = useState(null);
   return (
     <>
       <div className={`${styles.backgroundTeaser}`}>
@@ -53,6 +55,28 @@ export default function TrainDetailPage() {
                 onClick={() => setSelectedCase(caseItem)}
               >
                 {caseItem.case}
+              </div>
+            ))}
+        </div>
+      </section>
+
+      <section>
+        <div className={`${styles.studiesContainer}`}>
+          {selectedCase &&
+            selectedCase.studies.map((study) => (
+              <div
+                className={`${styles.studyCard} ${
+                  selectedStudy === study.id ? styles.selected : ""
+                }`}
+                onClick={() => setSelectedStudy(study.id)}
+              >
+                <h1>{study.aliasName}</h1>
+                <p>{study.description}</p>
+                <div className={`${styles.difficultyStars}`} alt="Difficulty">
+                  {Array.from({ length: study.complexity }).map((_, index) => (
+                    <img key={index} src="/star.png" alt="star" width={20} />
+                  ))}
+                </div>
               </div>
             ))}
         </div>
@@ -104,9 +128,10 @@ export default function TrainDetailPage() {
             }`}
           >
             <h3>Image</h3>
-            {/* <Gallery></Gallery> */}
-            <StaticHTMLComponent></StaticHTMLComponent>
-            {/* <DicomDataParser></DicomDataParser> */}
+            <CombinedComponent
+              selectedCase={selectedCase}
+              selectedStudy={selectedStudy}
+            ></CombinedComponent>
           </div>
           <div
             className={`${styles.detailSectionContentRight} ${

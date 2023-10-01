@@ -71,3 +71,47 @@
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.16);
 }
+
+.studiesContainer {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 12px;
+  padding: 24px 0px;
+  margin: -36px 0px;
+}
+.studyCard {
+  flex: 1;
+  padding: 24px;
+  border-radius: 12px;
+  background-color: rgba(220, 220, 220, 0.5);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.studyCard h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.studyCard p {
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.studyCard:hover {
+  background-color: rgba(235, 235, 235, 0.7);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.09);
+}
+
+.studyCard.selected {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.09);
+}
+
+.studyCard .difficultyStars {
+  margin-bottom: -12px;
+  filter: opacity(50%);
+}

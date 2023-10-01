@@ -27,21 +27,50 @@ export const initialTasks = [
     progress: 45,
     structure: [
       {
-        case: "case 1 Lorem Ipsum",
+        case: "Case 1: A curious case of a sick patient",
         id: "abc123",
         studies: [
-          "1b9baeb16d2aeba13bed71045df1bc65",
-          "02ef8f31ea86a45cfce6eb297c274598",
-          "9ab20df7b89dd84716029b777ed7a5b2",
+          {
+            id: "1b9baeb16d2aeba13bed71045df1bc65",
+            aliasName: "Lorem Study",
+            description:
+              "An easy study to get you started. Get familiar with the interface and the tools.",
+            complexity: 1,
+          },
+          {
+            id: "02ef8f31ea86a45cfce6eb297c274598",
+            aliasName: "Study Ipsum",
+            description:
+              "Your first real case, analyze the patient and find the correct diagnosis.",
+            complexity: 2,
+          },
+          {
+            id: "9ab20df7b89dd84716029b777ed7a5b2",
+            aliasName: "Dolor Study",
+            description:
+              "Tough mode - no hints, no help. You are on your own. Good luck!",
+            complexity: 3,
+          },
         ],
       },
       {
-        case: "case 2 Dolor sit Amet",
+        case: "Case 2: The mysterious Old Lady",
         id: "abc456",
         studies: [
-          "1b9baeb16d2aeba13bed71045df1bc65",
-          "02ef8f31ea86a45cfce6eb297c274598",
-          "9ab20df7b89dd84716029b777ed7a5b2",
+          {
+            id: "3b1cda064d9d7f2afffac6dab4b6eaf9",
+            aliasName: "Study Sit Amet",
+            description:
+              "An easy study to get you started. Get familiar with the interface and the tools.",
+            complexity: 1,
+          },
+          {
+            id: "feb6447a72c9a0a31e1bb4459e547964",
+            aliasName: "Consecetur Study",
+            description:
+              "Can you find the correct diagnosis? This case is a bit more difficult than the first one.",
+            complexity: 3,
+          },
         ],
       },
     ],
