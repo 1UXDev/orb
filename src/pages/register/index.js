@@ -4,23 +4,46 @@ import { useRouter } from "next/router";
 export default function Register() {
   const router = useRouter();
 
-  const [data, setData] = useState({
-    fullname: "",
-    email: "",
+  const [formError, setFormError] = useState(null);
+  const [passwords, setPasswords] = useState({
     password: "",
     confirm_password: "",
   });
 
   const registerUser = async (e) => {
     e.preventDefault();
-    const response = await fetch("../api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ data }), // does data have to be wrapped as object here?
-    });
-    const { user } = await response.json();
-    console.log("register form", { user });
-    router.push("/");
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    if (
+      !data.fullname ||
+      !data.email ||
+      !data.password ||
+      !data.confirm_password
+    ) {
+      setFormError("Please fill in all fields");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data }),
+      });
+
+      if (res.ok) {
+        console.log("Alles erledigt");
+        e.target.reset();
+        router.push("/login");
+      } else {
+        setFormError(data.message);
+      }
+    } catch (err) {
+      console.error("Error occured!!!!!!", err);
+      setFormError(err.message);
+    }
   };
 
   return (
@@ -31,44 +54,51 @@ export default function Register() {
             <h1 className="mb-8 text-3xl text-center">Sign up</h1>
             <form className="RegisterForm" onSubmit={registerUser}>
               <input
-                id="data.fullname"
-                onChange={(e) => setData({ ...data, fullname: e.target.value })}
+                id="fullname"
                 type="text"
                 className="block border border-grey-light w-full p-3 rounded mb-4"
                 name="fullname"
                 placeholder="Full Name"
+                required
               />
 
               <input
-                id="data.email"
-                onChange={(e) => setData({ ...data, email: e.target.value })}
+                id="email"
                 type="text"
                 className="block border border-grey-light w-full p-3 rounded mb-4"
                 name="email"
                 placeholder="Email"
+                required
               />
 
               <input
-                id="data.password"
-                onChange={(e) => setData({ ...data, password: e.target.value })}
+                id="password"
+                onChange={(e) =>
+                  setPasswords({ ...passwords, password: e.target.value })
+                }
                 type="password"
                 className="block border border-grey-light w-full p-3 rounded mb-4"
                 name="password"
                 placeholder="Password"
+                required
               />
               <input
-                id="data.confirm_password"
+                id="confirm_password"
                 onChange={(e) =>
-                  setData({ ...data, confirm_password: e.target.value })
+                  setPasswords({
+                    ...passwords,
+                    confirm_password: e.target.value,
+                  })
                 }
                 type="password"
                 className="block border border-grey-light w-full p-3 rounded mb-4"
                 name="confirm_password"
                 placeholder="Confirm Password"
+                required
               />
               <div className="checkPassword">
-                {data.confirm_password.length > 0
-                  ? data.password === data.confirm_password
+                {passwords?.confirm_password.length > 0
+                  ? passwords.password === passwords.confirm_password
                     ? "Confirmed"
                     : "Not Matching yet"
                   : ""}
@@ -81,6 +111,7 @@ export default function Register() {
                 Create Account
               </button>
             </form>
+            {formError && <div className="error">{formError}</div>}
 
             <div className="text-center text-sm text-grey-dark mt-4">
               By signing up, you agree to the
