@@ -1,0 +1,11 @@
+// With no SSR
+// To dynamically load a component on the client side, you can use the ssr option to disable server-rendering.
+// This is useful if an external dependency or component relies on browser APIs like window.
+
+import dynamic from "next/dynamic";
+
+const DynamicHeader = dynamic(() => import("../components/header"), {
+  ssr: false,
+});
+
+// https://nextjs.org/docs/pages/building-your-application/optimizing/lazy-loading
