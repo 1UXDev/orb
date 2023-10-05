@@ -1,51 +1,25 @@
-import bcrypt from "bcrypt";
-import { PrismaClient } from "@prisma/client";
+import { connectMongoDB } from "@/lib/connect";
 import { NextResponse } from "next/server";
+import bcrypt from "bcrypt";
+import User from "@/db/models/user";
 
-const prisma = new PrismaClient();
-
-export default async function POST(req) {
+export default async function POST(req, res) {
   try {
-    const { name, email, password } = req.body;
-
-    if (!name || !email || !password) {
-      return NextResponse.badRequest(
-        "Missing fields: name, email, or password",
-        {
-          status: 400,
-        }
-      );
-    }
-
-    // Perform more comprehensive input validation for email and password here
-
-    const existingUser = await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-    });
-
-    if (existingUser) {
-      return NextResponse.badRequest("User with this email already exists", {
-        status: 400,
-      });
-    }
-
+    const { fullname, email, password } = await req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-      },
+
+    await connectMongoDB();
+
+    const user = await User.create({
+      name: fullname,
+      email,
+      password: hashedPassword,
     });
 
-    return NextResponse.json({
-      message: "User registered successfully",
-      user,
-    }).redirect("/login");
+    res.setHeader("Content-Type", "application/json");
+    res.statusCode = 200;
+    res.end(JSON.stringify({ success: true }));
   } catch (error) {
-    console.error("Error during user registration:", error);
-    return NextResponse.error("Internal Server Error", { status: 500 });
+    console.error(error);
   }
 }
