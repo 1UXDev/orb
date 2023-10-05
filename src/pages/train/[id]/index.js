@@ -10,6 +10,7 @@ import { tableDB } from "../../../../public/tableDB";
 import Questionnaire from "@/components/Questionnaire/Questionnaire";
 import CombinedComponent from "@/components/DicomLocal/StaticComponent";
 import Datatable from "@/components/Datatable/Datatable";
+import DicomLocal6 from "@/components/DicomLocal/DicomLocal6";
 
 export default function TrainDetailPage() {
   const router = useRouter();
@@ -128,10 +129,14 @@ export default function TrainDetailPage() {
             }`}
           >
             <h3>Image</h3>
-            <CombinedComponent
+            {/* <CombinedComponent
               selectedCase={selectedCase}
               selectedStudy={selectedStudy}
-            ></CombinedComponent>
+            ></CombinedComponent> */}
+            <DicomLocal6
+              selectedCase={selectedCase}
+              selectedStudy={selectedStudy}
+            ></DicomLocal6>
           </div>
           <div
             className={`${styles.detailSectionContentRight} ${
