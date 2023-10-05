@@ -13,13 +13,13 @@ export default function Register() {
 
   const registerUser = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/auth/register", {
-      //could path also be /api/register?
+    const response = await fetch("../api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ data }), // does data have to be wrapped as object here?
     });
     const { user } = await response.json();
+    console.log("register form", { user });
     router.push("/");
   };
 
