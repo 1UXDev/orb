@@ -36,7 +36,7 @@ export default function Register() {
       if (res.ok) {
         console.log("Alles erledigt");
         e.target.reset();
-        router.push("/login");
+        router.push("/");
       } else {
         setFormError(data.message);
       }
