@@ -4,6 +4,7 @@ import DashboardCard from "@/components/DashboardCard/DashboardCard";
 import styles2 from "@/components/Dashboard/Dashboard.module.css";
 import { initialTasks } from "../../../public/trainingDB";
 import Link from "next/link";
+import { uid } from "uid";
 
 const lastTraining = {
   id: 3,
@@ -18,7 +19,7 @@ const lastTraining = {
     "https://images.unsplash.com/photo-1616012480717-fd9867059ca0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bXJpfGVufDB8fDB8fHww&auto=format&fit=crop&w=1800&q=60",
 };
 
-export default function train() {
+export default function Train() {
   // State to store tasks
   const [tasks, setTasks] = useState(initialTasks);
 
@@ -54,7 +55,7 @@ export default function train() {
               {tasks
                 .filter((task) => task.status === "open")
                 .map((task) => (
-                  <DashboardCard task={task}></DashboardCard>
+                  <DashboardCard key={uid()} task={task}></DashboardCard>
                 ))}
             </ul>
           </article>

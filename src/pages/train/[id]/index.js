@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import styles from "./trainDetail.module.css";
+import { uid } from "uid";
 
 // Mock DBs
 import { initialTasks } from "../../../../public/trainingDB";
@@ -44,6 +45,7 @@ export default function TrainDetailPage() {
           {task &&
             task.structure.map((caseItem, index) => (
               <div
+                key={uid()}
                 className={`${styles.casePill} ${
                   selectedCase !== null
                     ? selectedCase === caseItem
@@ -66,6 +68,7 @@ export default function TrainDetailPage() {
           {selectedCase &&
             selectedCase.studies.map((study) => (
               <div
+                key={uid()}
                 className={`${styles.studyCard} ${
                   selectedStudy === study.id ? styles.selected : ""
                 }`}

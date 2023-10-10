@@ -38,7 +38,8 @@ export default function Register() {
         e.target.reset();
         router.push("/");
       } else {
-        setFormError(data.message);
+        const responseJson = await res.json();
+        setFormError(responseJson.message);
       }
     } catch (err) {
       console.error("Error occured!!!!!!", err);
@@ -99,8 +100,8 @@ export default function Register() {
               <div className="checkPassword">
                 {passwords?.confirm_password.length > 0
                   ? passwords.password === passwords.confirm_password
-                    ? "Confirmed"
-                    : "Not Matching yet"
+                    ? "Passwords Match ✔️"
+                    : "Not Matching yet ❌"
                   : ""}
               </div>
 
@@ -111,7 +112,14 @@ export default function Register() {
                 Create Account
               </button>
             </form>
-            {formError && <div className="error">{formError}</div>}
+            {formError && (
+              <div
+                className="error"
+                style={{ fontWeight: "bold", color: "red" }}
+              >
+                {formError}
+              </div>
+            )}
 
             <div className="text-center text-sm text-grey-dark mt-4">
               By signing up, you agree to the
