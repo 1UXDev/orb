@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./Dashboard.module.css";
 import DashboardCard from "../DashboardCard/DashboardCard";
 import { initialTasks } from "../../../public/trainingDB";
+import uid from "uid";
 
 const Dashboard = () => {
   // State to store tasks
@@ -21,7 +22,7 @@ const Dashboard = () => {
             {tasks
               .filter((task) => task.status === "open")
               .map((task) => (
-                <DashboardCard task={task}></DashboardCard>
+                <DashboardCard task={task} key={uid()}></DashboardCard>
               ))}
           </ul>
         </article>
@@ -31,7 +32,7 @@ const Dashboard = () => {
             {tasks
               .filter((task) => task.status === "done")
               .map((task) => (
-                <DashboardCard task={task}></DashboardCard>
+                <DashboardCard task={task} key={uid()}></DashboardCard>
               ))}
           </ul>
         </article>
